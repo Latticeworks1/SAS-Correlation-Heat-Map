@@ -1,52 +1,86 @@
-# SAS Correlation Heatmap for Cancer Alley Thesis Analysis
+# SAS Correlation Heatmap for Cancer Alley Thesis
 
-This repository contains SAS code to generate a professional, annotated correlation heatmap from environmental and health data analyzed in my M.S. thesis at Tulane University School of Public Health and Tropical Medicine.
+SAS code to generate annotated correlation heatmaps from environmental and health data analyzed in my M.S. thesis at Tulane University School of Public Health and Tropical Medicine.
 
-The thesis, titled "Cancer Alley: Industrial Emissions and Cancer Incidence in Louisiana," examines census tract-level associations between toxic releases from industrial facilities (using EPA Toxic Release Inventory data) and cancer incidence (Louisiana Tumor Registry), while adjusting for socioeconomic and behavioral risk factors.
+**Thesis:** "Cancer Alley: Industrial Emissions and Cancer Incidence in Louisiana"
 
-## Project Overview
+Examines census tract-level associations between toxic releases from industrial facilities (EPA TRI data) and cancer incidence (Louisiana Tumor Registry), adjusting for socioeconomic and behavioral risk factors.
 
-This heatmap visualizes pairwise Pearson correlations among key variables, including:
-- Industrial exposure proxies (CDens, RDens, NearF_D, NearR_D, SF_D)
-- Socioeconomic factors (GINI, Poverty, MedIncome)
-- Demographic factors (Black)
-- Behavioral risk factors (Smoking, Binge, Obesity, CheckUps)
+---
 
-The visualization is designed for clarity in reports and publications, with centered numeric labels, a clean color gradient, and minimal axis clutter.
+## Overview
 
-## Files
+This heatmap visualizes Pearson correlations among:
 
-- `correlation_heatmap.sas` – Complete, reproducible SAS code
-  - Imports CSV data
-  - Computes correlations using PROC CORR
-  - Reshapes output for plotting
-  - Generates annotated heatmap with SGPLOT (HEATMAPParm statement)
-  - Exports to PDF
-- `CORRELATION_HEATMAP.pdf` – Example output from the code (generated December 2025)
+- **Industrial exposure proxies** – CDens, RDens, NearF_D, NearR_D, SF_D
+- **Socioeconomic factors** – GINI, Poverty, MedIncome  
+- **Demographics** – Black
+- **Behavioral risk factors** – Smoking, Binge, Obesity, CheckUps
+
+---
+
+## Repository Contents
+```
+.
+├── correlation_heatmap.sas      # Main SAS script
+├── CORRELATION_HEATMAP.pdf      # Example output
+├── AllCanc_0303.csv             # Example dataset
+└── README.md                    # You are here
+```
+
+**correlation_heatmap.sas**  
+Complete SAS workflow that imports CSV data, computes correlations using PROC CORR, reshapes output with arrays, and generates an annotated heatmap using SGPLOT with HEATMAPParm and overlaid TEXT labels. Exports journal-ready PDF.
+
+**CORRELATION_HEATMAP.pdf**  
+Example output generated December 2025.
+
+> **Note:** The actual thesis dataset contains sensitive health information and is not included in this repository. An example dataset is provided for demonstration.
+
+---
 
 ## Requirements
 
 - SAS 9.4 or later
-- Input CSV file with the variables listed in the macro variable `corr_vars`
+- CSV input file with variables specified in the `corr_vars` macro variable
 
-Note: The actual thesis dataset contains sensitive health information and is not included. An example dataset 
-![AllCanc_0303.csv](AllCanc_0303.csv) is included.
+---
 
-## Code Highlights
+## Quick Start
+```bash
+git clone https://github.com/yourusername/cancer-alley-heatmap.git
+cd cancer-alley-heatmap
+```
 
-- Use of macro variable to define variable list once (avoids repetition and errors)
-- Efficient reshaping of PROC CORR output using arrays
-- Modern SGPLOT features: HEATMAPParm, overlaid TEXT for value labels, custom color model
-- Journal-style PDF output suitable for theses and manuscripts
+Open `correlation_heatmap.sas` in SAS and update the data path:
+```sas
+/* Edit this line with your data path */
+%let datapath = /path/to/your/data.csv;
 
-## Output Example
+/* Run the script */
+%include "correlation_heatmap.sas";
+```
 
-![Correlation Heatmap](CORRELATION_HEATMAP.pdf)
+The script will generate `CORRELATION_HEATMAP.pdf` in your working directory.
+
+---
+
+## Technical Highlights
+
+- Macro-based variable management for maintainability
+- Efficient PROC CORR output reshaping using SAS arrays
+- Modern SGPLOT features: HEATMAPParm, custom color gradients, centered text overlays
+- Publication-ready output formatting
+
+---
 
 ## Contact
 
-Wendy Bogil  
+**Wendy Bogil**  
 New Orleans, LA  
-wendybogil@gmail.com  
-[LinkedIn](https://www.linkedin.com/in/wendybogil)
+[wendybogil@gmail.com](mailto:wendybogil@gmail.com) | [LinkedIn](https://www.linkedin.com/in/wendybogil)
 
+---
+
+## License
+
+This code is available for academic and research purposes.
